@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="description" content="">
+	<!-- <meta name='google-singin-client_id' content="314138497952-0l674ff93ppb54avplqnhe2h4p10c29r.apps.googleusercontent.com">
+	<script src="https:/apis.google.com/js/plataform.js" async defer></script> -->
+	<link href="css/estilos_producto.css" rel="stylesheet">
+    <title>eMercado - Todo lo que busques está aquí</title>
+</head>
+
+<style>
+	
+	body,html{
+    background-image: url(img/cover_back.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+	top: -10px;
+    height: 100%;
+    width: 100%;
+    font-family: 'Numans', sans-serif;
+    /*backdrop-filter: url(commonfilters.svg#filter); */
+}
+.main_contener{
+	height: 102%;
+    width: 30%;
+	margin-top: -10px;
+	align-items: center;
+	display: flex;
+	float: right;
+    font-family: 'Numans', sans-serif;
+    backdrop-filter: url(commonfilters.svg#filter);
+	background-image: url(img/back3.jpg);
+	background-color:  rgb(231, 179, 233);
+	background-size: cover;
+	transition: width 2s, height 4s;
+}
+.main_contener:hover{
+	width: 32%;
+}
+
+.login{
+    position: relative;
+    width: 270px;
+    height: 100%; 
+    padding: 10px;
+    left: 20%;
+    top: 250px;
+	font: 20px Arial, sans-serif;
+	font-weight: 350;
+	font-size: 20px;
+	text-align: center;
+	align-content: center;
+	color: whitesmoke;
+	z-index: 0;
+}
+#signin{
+	background-color:rgb(238, 54, 94);
+	opacity: 0.8;
+}
+
+.login input[type=text]{
+	width: 250px;
+	height: 30px;
+	background: rgb(238, 54, 94);
+	border: 1px solid rgba(255,255,255,0.6);
+	border-radius: 2px;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 10px;
+	opacity: 0.9;
+}
+
+.login input[type=password]{
+	width: 250px;
+	height: 30px;
+	background: rgb(238, 54, 94);
+	border: 1px solid rgba(255,255,255,0.6);
+	border-radius: 2px;
+	color: darkorange;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 10px;
+	margin-top: 10px;
+	opacity: 0.9;
+}
+
+.login input[type=button]{
+	width: 270px;
+	height: 35px;
+	background: rgb(238, 54, 94);
+	border: 1px solid #fff;
+	cursor: pointer;
+	border-radius: 2px;
+	color:#fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 6px;
+	margin-top: 10px;
+}
+.login input[type=checkbox]{
+	width: 30px;
+	height: 15px;
+	background: #fff;
+	border: 1px solid #fff;
+	cursor: pointer;
+	border-radius: 2px;
+	color: #a18d6c;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 5px;
+	margin-top: 15px;
+}
+.login input[type=button]:hover{
+	opacity: 0.9;
+}
+
+#validation:hover, #password:hover, #user:hover{
+	background-color: tomato;
+}
+
+.login input[type=checkbox]:hover{
+	opacity: 0.9;
+}
+
+.login input[type=button]:active{
+	opacity: 0.6;
+}
+
+.login input[type=checkbox]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+.login input[type=text]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+.login input[type=password]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+.login input[type=button]:focus{
+	outline: none;
+}
+
+.login input[type=checkbox]:focus{
+	outline: none;
+}
+
+::-webkit-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}
+
+::-moz-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}
+
+</style>
+
+<body>
+
+    <div class="main_contener">
+
+
+        <div class="login">
+			<!-- <img class="logo" src="img/cover_back.png" alt=""><br> -->
+			<p id="signin">e-Commerce</p>
+            <input id="user" type="text" placeholder="Usuario" name="user" required><br>
+            <input id="password" type="password" placeholder="Contraseña" name="pass" required><br>
+            <input id="validation" type="button" onclick= login(user.value,password.value); value="Ingresar"><br>
+			<input type="checkbox">Recordarme
+			<!-- <div class="g-signin2"></div> -->
+		</div>
+
+    <script src="js/init.js"></script>
+	<script src="js/login.js"></script>
+		
+	</div>
+
+</body>
+</html>

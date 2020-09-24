@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="C:\Users\ferqu\Desktop\tallersolucion\css\font-awesome.min.css">
+    <title>Prueba carrito</title>
+    <style>
+        
+            
+        
+            
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2> Contenido del carrito. </h2>
+        <h3> Tu carrito contiene <span class="badge" id="cont"></span> elementos</h3>
+        <div id="carrito"></div><br>
+        <button id="pagar" class="btn btn-primary">Pagar</button>
+        <button id="borrar" class ="btn btn-danger" onclick=" localStorage.clear(); location.reload();">Borrar <span class="badge" id="aborrar">0 </span> artículos </button>
+    </div>
+    <script>
+        var contenido= JSON.parse(localStorage.getItem("lista"));//Obtengo datos de localStorage.
+        var lista="";
+        var cantidad=0;
+        if (contenido!=null && contenido.length>0){
+            cantidad = contenido.length;
+        contenido.forEach(producto => {
+            lista+= "<li>" + producto.nombre + " -- $ " + producto.edad +"</li>"; 
+        });
+        }else {
+            lista+="<div class='alert alert-warning'> El carrito está vacío </div>";
+
+        }
+        document.getElementById('carrito').innerHTML=lista;
+        document.getElementById('cont').innerHTML=cantidad;
+        //document.getElementById('aborrar').innerHTML=cantidad;
+    </script>
+</body>
+</html>

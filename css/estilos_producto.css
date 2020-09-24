@@ -1,0 +1,374 @@
+.dropbtn {
+    /* background-color: #4CAF50; */
+    background-color: rgba(5, 5, 5, 0.753);
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+}
+#carousel-item active{
+  width: 280px;
+  height: 200px;
+}
+#barrasuperior{
+    width: 800px;
+  }
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    color: black;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    color: black;
+    background-color: rgb(233, 216, 216);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+@import url("https://fonts.googleapis.com/css?family=Indie+Flower");
+
+  h1{
+    width: 100%;
+    left: 40%;
+  }
+  .col-3{
+    width: 100%;
+  }
+  .img-thumbnail{
+    width: 200px;
+    height: 120px;
+    transition-duration: 0.3s;
+  }
+  .img-thumbnail:hover{
+    width: 280px;
+    height: 200px;
+  }
+  #vehiculo{
+    border-bottom: 1px solid #ebe5e5;
+    width: 100%;
+  }
+  .infoP{
+    position: relative;
+    width: 100%;
+  }
+  .puntos{
+    width: 500px;
+    margin-left: 30%;
+  }
+  
+  span{
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-weight: 400;
+      /* color: blue; */
+  }
+  #ind_coments{
+    width: 100%;
+    margin: auto;
+    padding: 15px;
+    background-color: whitesmoke;
+    transition-duration: 0.3s;
+  }
+  #ind_coments:hover{
+    color: white;
+    background-color: rgb(104, 101, 101);
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+  #date{
+    font-size: 10px;
+  }
+  #informacion_prod{
+    font-size: 13px;
+  }
+  #user_score{
+    font-size: 16px;
+    width: 100%;
+    margin: auto;
+    color: orange;
+  }
+  .button {
+    width: 180px;
+    transition-duration: 0.4s;
+    float: right;
+    background-color: lavenderblush;
+    border-radius: 13px;
+}
+  .button:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+  #barrasuperior{
+      width: 800px;
+    }
+  #comentario_user,#enviar{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+  .usuario{
+    position: relative;
+    top: 0px;
+    left: 30%;
+    font-style: italic;
+    color: blanchedalmond;
+    font-size: smaller;
+  }
+  #bye{
+    width: 150px;
+    text-decoration: none;
+    padding: 1px;
+    /*font-weight: 100;*/
+    font-size: 10px;
+    color: black;
+    border: none;
+    opacity: 0.5;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  #nombre_user{
+    font-size: larger;
+    font-family: 'Trebuchet MS';
+    color: orange;
+    text-align: center;
+  }
+  #insert_comentario{
+    font-family: 'Arial Narrow Bold', sans-serif;
+    font-weight: 100;
+    text-align: center;
+    color: rgb(59, 4, 4);
+  }
+  #cat-list-container{
+    width: 90%;
+    margin-left: 5%;
+    border-collapse: collapse;
+  }
+  .bloque_comentarios{
+    float: left;
+    width: 90%;
+    padding-left: 5%;
+    border-bottom: 1px solid #ebe5e5;
+  }
+  .container{
+    width: 110%;
+  }
+  .seccion_relacionados{
+    position: relative;
+    width: 110%;
+    align-items: center;
+    align-content: center;
+    padding-top: 30px;
+    left: 15%;
+  }
+  .prod_rela{
+    border: 1px solid #ebe5e5;
+    border-radius: 10px;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    padding: 5px;
+    width: 900px;
+    height: 200px;
+    transition-duration: 0.4s;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+  .prod_rela:hover{
+    width: 905px;
+    height: 205px;
+    background-color: rgb(255, 240, 240);
+  }
+  .img_rela{
+    width: 200px;
+    height: 120px;
+  }
+  
+  @font-face {
+  font-family: "Mystery Quest";
+  src: url("mystery-quest.woff2");
+  }
+  .add_a_carrito{
+    right: 0px;
+    width: 180px;
+    height: 50px;
+    transition-duration: 0.4s;
+    float: right;
+    background-color: lavenderblush;
+    border-radius: 13px;
+  }
+  .add_a_carrito:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+  body,html{
+    background-image: url(img/cover_back.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+	top: -10px;
+    height: 100%;
+    width: 100%;
+    font-family: 'Numans', sans-serif;
+    /*backdrop-filter: url(commonfilters.svg#filter); */
+}
+.main_contener{
+	height: 102%;
+    width: 30%;
+	margin-top: -10px;
+	align-items: center;
+	display: flex;
+	float: right;
+    font-family: 'Numans', sans-serif;
+    backdrop-filter: url(commonfilters.svg#filter);
+	background-image: url(img/back3.jpg);
+	background-color:  rgb(231, 179, 233);
+	background-size: cover;
+	transition: width 2s, height 4s;
+}
+.main_contener:hover{
+	width: 32%;
+}
+
+.login{
+    position: relative;
+    width: 270px;
+    height: 100%; 
+    padding: 10px;
+    left: 20%;
+    top: 250px;
+	font: 20px Arial, sans-serif;
+	font-weight: 350;
+	font-size: 20px;
+	text-align: center;
+	align-content: center;
+	color: whitesmoke;
+	z-index: 0;
+}
+#signin{
+	background-color:rgb(238, 54, 94);
+	opacity: 0.8;
+}
+
+.login input[type=text]{
+	width: 250px;
+	height: 30px;
+	background: rgb(238, 54, 94);
+	border: 1px solid rgba(255,255,255,0.6);
+	border-radius: 2px;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 10px;
+	opacity: 0.9;
+}
+
+.login input[type=password]{
+	width: 250px;
+	height: 30px;
+	background: rgb(238, 54, 94);
+	border: 1px solid rgba(255,255,255,0.6);
+	border-radius: 2px;
+	color: darkorange;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 10px;
+	margin-top: 10px;
+	opacity: 0.9;
+}
+
+.login input[type=button]{
+	width: 270px;
+	height: 35px;
+	background: rgb(238, 54, 94);
+	border: 1px solid #fff;
+	cursor: pointer;
+	border-radius: 2px;
+	color:#fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 6px;
+	margin-top: 10px;
+}
+.login input[type=checkbox]{
+	width: 30px;
+	height: 15px;
+	background: #fff;
+	border: 1px solid #fff;
+	cursor: pointer;
+	border-radius: 2px;
+	color: #a18d6c;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 5px;
+	margin-top: 15px;
+}
+.login input[type=button]:hover{
+	opacity: 0.9;
+}
+
+#validation:hover, #password:hover, #user:hover{
+	background-color: tomato;
+}
+
+.login input[type=checkbox]:hover{
+	opacity: 0.9;
+}
+
+.login input[type=button]:active{
+	opacity: 0.6;
+}
+
+.login input[type=checkbox]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+.login input[type=text]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+.login input[type=password]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+.login input[type=button]:focus{
+	outline: none;
+}
+
+.login input[type=checkbox]:focus{
+	outline: none;
+}
+
+::-webkit-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}
+
+::-moz-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}
