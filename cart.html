@@ -59,9 +59,17 @@
     </div>
   </nav>
 
-  <div class="container p-5">
-    <div id="lista"></div>    
+  <div class="container">
+    <h2> Contenido del carrito. </h2>
+    <h3> Tu carrito contiene <span class="badge" id="cont"></span> elementos</h3>
+    <div id="carrito"></div><br>
+    <button id="pagar" class="btn btn-primary">Pagar</button>
+    <button id="borrar" class ="btn btn-danger" onclick=" localStorage.clear(); location.reload();">Borrar <span class="badge" id="aborrar">0 </span> artículos </button>
   </div>
+
+  <!-- <div class="container p-5">
+    <div id="lista"></div>    
+  </div> -->
 
   <div id="spinner-wrapper">
     <div class="lds-ring">
@@ -83,6 +91,22 @@
     // let nombre_usuario_comentario = `<p id="nombre_user"><i class="fas fa-user"></i> ${usuario}</p>`
     // document.getElementById("nombre_user").innerHTML = nombre_usuario_comentario;
     //Nótese que si cerramos el navegador y volvemos a abrir, el dato sigue almacenado
+
+    var contenido= JSON.parse(localStorage.getItem("lista"));//Obtengo datos de localStorage.
+    var lista="";
+    var cantidad=0;
+    if (contenido!=null && contenido.length>0){
+        cantidad = contenido.length;
+    contenido.forEach(producto => {
+        lista+= "<li>" + producto.nombre + " -- $ " + producto.edad +"</li>"; 
+    });
+    }else {
+        lista+="<div class='alert alert-warning'> El carrito está vacío </div>";
+
+    }
+    document.getElementById('carrito').innerHTML=lista;
+    document.getElementById('cont').innerHTML=cantidad;
+    //document.getElementById('aborrar').innerHTML=cantidad;
   </script>
 </body>
 
