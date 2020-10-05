@@ -7,7 +7,7 @@ function showProduct(array){
             htmlContentToAppend += `
                 <div class="row">
                     <div class="infoP">
-                        <h1 id="vehiculo">`+ array.name +`</h1><button class="add_a_carrito" id="a_carrito" onclick="guardar_producto_en_carro();"><strong><i class="fa fa-shopping-cart"></i>Añadir a Mi Carrito</button>
+                        <h1 id="vehiculo">`+ array.name +`</h1><button class="add_a_carrito" id="a_carrito"><strong><i class="fa fa-shopping-cart"></i>Añadir a Mi Carrito</button>
                         <h5><strong>Precio</strong></h5>
                         <h7>`+  array.currency + ' ' + array.cost + `</h7><br><br>
                         <h5><strong>Descripcion</strong></h5>
