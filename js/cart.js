@@ -2,7 +2,7 @@
 
 //FUNCION PARA MOSTRAR ARTICULOS DEL CARRITO
 var articulo = [];
-function mostrar_en_pantalla(array,cantidad_input){
+function mostrar_en_pantalla(array){
 	//variables html para imprimir carrito y factura
 	let html = '';
 	let html_factura = '';
@@ -29,7 +29,7 @@ function mostrar_en_pantalla(array,cantidad_input){
 		multiplicador = 0.03;
 		ENVIO_tipo = "Estándar(3%)"
 	}
-
+	
     for (let i = 0; i < array.articles.length; i++) {
 		const producto = array.articles[i];
 		//valores de los productos para mostrar en el carrito
@@ -65,12 +65,11 @@ function mostrar_en_pantalla(array,cantidad_input){
 							<div class="col-xs-6 text-right">
 								<h6 id="costo_unitario"><strong>Costo unitario:</strong><br> ${unitario.toFixed(2)} U$S</h6>
 								<h6 id="costo_total"><strong>TOTAL:</strong><br> ${total_dolares.toFixed(2)} U$S</h6>							
-							</div>
+							</div>							
 							<div class="col-xs-4">
-								<button id="add_${i}" onclick="aumentar_cantidad(${i});" style="font-size: smaller;" type="button" class="btn" data-dismiss="modal"><i class="fas fa-plus"></i></button>
-								<button id="quit_${i}" onclick="disminuir_cantidad();" style="font-size: smaller;" type="button" class="btn" data-dismiss="modal"><i class="fas fa-minus"></i></button>
-								<strong>Cantidad:</strong> <input id="cantidad${i}" type="number" class="form-control input-sm" value="${cantidad_producto}" min="0">
+								<strong>Cantidad:</strong> <input id="cantidad${i}" onchange="nuevo_calculo();" type="number" class="form-control input-sm" value="${cantidad_producto}" min="0">
 							</div>
+							<button id="add_${i}" onclick="aumentar_cantidad_${i}();" style="font-size: smaller;" type="button" class="btn" data-dismiss="modal" min="0"><i class="fas fa-plus"></i></button><button id="quit_${i}" onclick="disminuir_cantidad_${i}();" style="font-size: smaller;" type="button" class="btn" data-dismiss="modal" min="0"><i class="fas fa-minus"></i></button>
 							<div class="col-xs-2">
 								<button type="button" class="btn btn-link btn-xs">
 									<span class="glyphicon glyphicon-trash"> </span>
@@ -101,12 +100,26 @@ function limpiar_pantalla() {
 	document.getElementById('lista').innerHTML = html;
 }
 //funcion que aumenta la cantidad modifica la cantidad de producto cuando se apreta el boton +
-function aumentar_cantidad(indice){
-	var cantidades = [];
-	cantidades.push(document.getElementById("cantidad0").value);
-	cantidades.push(document.getElementById("cantidad1").value);
-	alert(cantidades);
-	const boton_apretado = document.getElementById("add_${indice}");
+function aumentar_cantidad_0(){
+	var cantidad = parseInt(document.getElementById("cantidad0").value);
+	cantidad += 1;
+	document.getElementById("cantidad0").value = cantidad;
+	return cantidad;
+}
+function aumentar_cantidad_1(){
+	var cantidad = parseInt(document.getElementById("cantidad1").value);
+	cantidad += 1;
+	document.getElementById("cantidad1").value = cantidad;
+}
+function disminuir_cantidad_0() {
+	var cantidad = parseInt(document.getElementById("cantidad0").value);
+	cantidad -= 1;
+	document.getElementById("cantidad0").value = cantidad;
+}
+function disminuir_cantidad_1() {
+	var cantidad = parseInt(document.getElementById("cantidad1").value);
+	cantidad -= 1;
+	document.getElementById("cantidad1").value = cantidad;
 }
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
