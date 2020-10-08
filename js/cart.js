@@ -29,7 +29,11 @@ function mostrar_en_pantalla(array){
 		multiplicador = 0.03;
 		ENVIO_tipo = "Estándar(3%)"
 	}
+
+	//cantidad de productos en el carro
 	
+
+
     for (let i = 0; i < array.articles.length; i++) {
 		const producto = array.articles[i];
 		//valores de los productos para mostrar en el carrito
@@ -130,7 +134,10 @@ document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(CART_INFO_2).then(function(resultado){
         if (resultado.status === "ok"){
             informacion_carrito = resultado.data;
-            mostrar_en_pantalla(informacion_carrito);
+			mostrar_en_pantalla(informacion_carrito);
+			var cantidad_en_carro = informacion_carrito.articles.length+1;
+			document.getElementById("cont").innerHTML = cantidad_en_carro;
+			document.getElementById("carito").innerHTML = cantidad_en_carro;
         }
 	})
 	document.getElementById("premiumradio").addEventListener("click", function(){

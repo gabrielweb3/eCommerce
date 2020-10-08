@@ -28,7 +28,7 @@
         <div class="dropdown" style="float:right;">
           <button class="dropbtn"><i class="fas fa-user"></i><span id="user"></span>!<br></button>
           <div class="dropdown-content">
-            <a href="#">Mi Carrito</a>
+            <a href="cart.html">Carrito <span id="carito" class="badge badge-light"></span></a>
             <a href="#">Mi perfil</a>
             <div class="dropdown-divider"></div>
             <a href="#"><button id="bye" onclick="localStorage.clear(); alert('Hasta la próxima!'); location.href='login.html';">Salir</button></a>
@@ -95,6 +95,7 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/category-info.js"></script>
+  <script src="js/cart.js"></script>
   <script>
     var usuario = localStorage.getItem("user"); //getItem Obtiene el dato de la posición "usuario"
    document.getElementById('user').innerHTML=usuario;

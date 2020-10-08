@@ -72,7 +72,7 @@
         <div class="dropdown" style="float:right;">
           <button class="dropbtn"><i class="fas fa-user"></i><span id="user"></span>!<br></button>
           <div class="dropdown-content">
-            <a href="cart.html">Carrito</a>
+            <a href="cart.html">Carrito <span id="carito" class="badge badge-light"></span></a>
             <a href="my-profile.html">Mi perfil</a>
             <div class="dropdown-divider"></div>
             <a href="#"><button id="bye" onclick="localStorage.clear(); alert('Hasta la próxima!'); location.href='login.html';">Salir</button></a>
@@ -100,7 +100,7 @@
             <div class="panel-title">
               <div class="row">
                 <div class="col-xs-6">
-                  <h4 style="text-align: center;"><span class="glyphicon glyphicon-shopping-cart"></span> Mi carrito </h4>
+                  <h4 style="text-align: center;"><span class="glyphicon glyphicon-shopping-cart"></span> El carrito contiene <span class="badge" id="cont"></span> elementos </h4>
                 </div>
                 <div class="col-xs-6">
                   <button type="button" class="btn btn-primary btn-sm btn-block">
