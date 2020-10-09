@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)https://getbootstrap.com/docs/4.3/examples/album/ -->
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <title>eMercado - Todo lo que busques está aquí</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+  <link href="css/dropzone.css" rel="stylesheet">
+  <link href="css/cover.css" rel="stylesheet">
+    <link href="cover/IcoMoon-Free-master/Font/demo-files/demo.css" rel="stylesheet">
+    <link href="css/cover.css" rel="stylesheet">
+    <link href="css/paraelcarro.css" rel="stylesheet">
+    <link href="cover/IcoMoon-Free-master/Font/demo-files/demo.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="site-header sticky-top py-1 bg-dark">
+    <div class="container d-flex flex-column flex-md-row justify-content-between">
+      <a class="py-2 d-none d-md-inline-block" href="cover.html">Inicio</a>
+      <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
+      <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
+      <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
+      <nav class="menutotal">
+        <ul class="menu">
+        <button class="icon icon-user-check" id="user"></button>
+
+        <ul class="subuser">
+
+          <br>
+          <br>
+          <button id="perfil" href="#">Mi Perfil</button>
+          
+<!-- Llamos a los ID de las fotos del auto y el arbol-->
+          <button id="carro" onclick= location.href='cart.html'>Mi carrito</button><div id="numpinocant"></div> <div id="numautocant"></div>
+          <img id="autito" src="img/autito.png">
+          <img id="pinito" src="img/pinito.png">
+          
+          <button id="cerrar" onclick="localStorage.clear(); alert('¡Hasta Pronto!'); location.href='index.html';"> Cerrar Sesión</button>
+        </ul>
+      </ul>
+
+      </nav>
+    </nav>
+    </div>
+  </nav>
+
+
+  <h3>Tu carro de compras</h3>
+  <h2>Artículos a comprar:</h2>
+  <br>
+
+  <!-- Llamos a los ID del primer producto relacionado-->
+<div class="containerr">
+  <div class="pino">
+  <img id="pinoImag"></img>
+  <div id="pinoUno"></div>
+  <p>COSTO UNITARIO</p>
+  <div id="pinoCuatro"></div>
+  <div id="pinoTres"></div>
+  <br>
+    <br>
+  <p>CANTIDAD</p>
+  <input type="number" class="cantidadpino" id="pinox" placeholder="" required="1" value="0" min="0">
+  <p>SUBTOTAL</p>
+  <strong id="pinototal">USD0</strong>
+  
+
+  </div>
+
+
+  <!-- Llamos a los ID del segundo producto relacionado-->
+  <div class="auto">
+    <img id="autoImag"></img>
+    <div id="autoUno"></div>
+    <p>COSTO UNITARIO</p>
+    <div id="autoCuatro"></div>
+    <div id="autoTres" ></div>
+    <br>
+    <br>
+    <p>CANTIDAD</p>
+    <input type="number" class="cantidadauto" id="autox" placeholder="" required="1" value="0" min="0">
+    <p>SUBTOTAL</p>
+    <strong id="autototal">USD0</strong>
+    </div>
+  </div>
+
+
+<!-- Botones que pulsan accion multiples-->
+  <input type="button" id="button2" value="¡ Agregar artículos a la sección de costos !">
+  <input type="button" id="button3" value="¡Restablecer la sección de costos!">
+  
+  
+ 
+  <!-- el contenedor que tiene los distintas posibilidades de envio-->
+<div class="todoelenvio">
+    <div id="envio"><h5 class="mb-3">Tipo de envío:</h5>
+      <div class="d-block my-3">
+        <div class="custom-control custom-radio">
+          <input id="goldradio" name="publicationType" type="radio" class="custom-control-input"  required="">
+          <label class="custom-control-label" for="goldradio">Premium 2 a 5 dias (15%)</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input id="premiumradio" name="publicationType" type="radio" class="custom-control-input" required="">
+          <label class="custom-control-label" for="premiumradio">Express 5 a 8 dias (7%)</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input id="standardradio" name="publicationType" type="radio" class="custom-control-input" required="">
+          <label class="custom-control-label" for="standardradio">Estándar 12 a 15 dias (5%)</label>
+        </div>
+      </div>
+<br>
+<!-- contenedor con tabla de dirección-->
+      <div class="direccion">
+        <h5>Dirección de envío:</h5>
+        Calle:<br><br> <input class="jjj" type="text" placeholder="Ingrese domicilio"><br><br>
+        Número:<br><br> <input class="jjj" type="number" placeholder="Ingrese número de domicilio"><br><br>
+        Esquina:<br><br> <input class="jjj" type="text" placeholder="Ingrese la esquina"><br><br>
+      </div>
+      <br>
+      <br>
+     
+<!-- contenedor que muesta la suma de los subtotales, su envio y el total de los dos anteriormente mencionado-->
+      <h5 id="titulocosto">Costos</h5>
+ <div class="costos">
+      
+      <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Subtotal (USD) </h6>
+              <small class="text-muted">Costo unitario del producto por cantidad</small>
+            </div>
+            <strong class="text-muted" id="productCostText">USD0</strong>  
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Costo de envío (USD) </h6>
+              <small class="text-muted">Según tipo de envío</small>
+            </div>
+            <span type ="number" class="text-muted" id="comissionText">USD0</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total (USD)</span>
+            <strong id="totalCostText">USD0</strong>
+          </li>
+        </ul>
+      </div>
+<!--Forma de pago que llama a la ventana emergente-->
+      <br><br>
+      <div class="pago">
+      <h5>Forma de pago</h5>
+      <br>
+      <div id="sel" class="icon icon-point-right"> <a href="javascript:abrir()">Seleccionar</a> </div>
+      <br>
+      
+      <div id="formasdepago"></div>
+      <div id="formadepago"></div>
+      <br>
+      <input onclick= restablecerDatos() class = "botons" id="rDatos" type = "submit" value = "Restablecer Datos">
+      <br><br>
+      <input onclick= fincompra() type="button" id="button" value="Finalizar compra"><br>
+
+
+<!-- Ventana emergente, se acciona cuando damos click a seleccionar-->
+      <section class = "formulario-registro" id="ventana">
+        <h4> Forma de pago: </h4>
+         Tarjeta de crédito
+        <input class = "controls" type = "text" name = "apellidos" id = "apellidos" placeholder = "Número de tarjeta" maxlength="16">
+        <input class = "controls" type = "text" name = "correo" id = "correo" placeholder = "Código de seguridad" maxlength="3">
+        <input class = "controls" type = "text" name = "correo" id = "correo" placeholder = "Vencimiento: MM/AA" maxlength="5">
+        <input onclick= cerrar() class = "botons" type = "submit" value = "Guardar">
+        <br>
+        <hr><hr>
+
+        Transferencia Bancaria
+        <input class = "controls" type = "text" name = "apellidos" id = "apellidos" placeholder = "Número de cuenta" maxlength="16">
+        <!-- cierra la ventana emergente-->
+        <input onclick= cerrrar() class = "botons" type = "submit" value = "Guardar">
+        <input onclick= zerar() class = "botons" id="cruz" type = "submit" value = "X">
+      </sección>
+<br><br>
+   
+      
+    </div>
+  
+    
+      
+      
+      
+  <div id="spinner-wrapper">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/init.js"></script>
+  <script src="cart.js"></script>
+  <script>
+//abre ventana emergente
+    function abrir(){
+      document.getElementById("ventana").style.display="block";
+    }
+    //lanza mensaje segun lo que seleccione el cliente en pantalla, tarjeta crédito
+    function cerrar() {
+      document.getElementById("ventana").style.display="none";
+      document.getElementById("rDatos").style.display="block";
+      document.getElementById("formasdepago").innerHTML = "Su tarjeta a sido guardada con éxito."
+      document.getElementById("formasdepago").style.display="block";
+    }
+//lanza mensaje segun lo que seleccione el cliente en pantalla, número bancario
+    function cerrrar() {
+      document.getElementById("ventana").style.display="none";
+      document.getElementById("rDatos").style.display="block";
+      document.getElementById("formadepago").innerHTML = "Su número de cuenta a sido guardada con éxito."
+      document.getElementById("formadepago").style.display="block";
+    }
+//cruz que cierra ventana
+    function zerar() {
+      document.getElementById("ventana").style.display="none";
+    }
+//elimina los datos seleccionados
+    function restablecerDatos() {
+      document.getElementById("formadepago").style.display="none";
+      document.getElementById("formasdepago").style.display="none";
+      document.getElementById("rDatos").style.display="none";
+    }
+    
+    //finaliza compra y te redirige a la misma pagina
+    function fincompra() {
+      window.location = 'cart.html'
+    }
+
+  </script>
+
+  <script>
+    var usuario = localStorage.getItem('user');
+    document.getElementById('user').innerHTML=usuario;
+   
+</script>
+
+
+</body>
+
+</html>
