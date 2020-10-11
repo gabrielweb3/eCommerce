@@ -15,11 +15,6 @@ function mostrar_en_pantalla(cantidades){
 	var total_con_envio = 0;
 	var envio_factura = 0;
 	
-	// //redefinición de variables para cálculos
-	// var cantidad_prod_1 = parseInt(document.getElementById("cantidad0").value);
-	// var cantidad_prod_2 = parseInt(document.getElementById("cantidad1").value);
-	
-
 	//especificación de envío
 	//seleccion de envio de producto goldradio
 	var ENVIO_gold = document.getElementById("goldradio").checked;
@@ -67,7 +62,7 @@ function mostrar_en_pantalla(cantidades){
             `
 			document.getElementById('lista').innerHTML += html;
 
-		//redeficnición variables para factura	
+		//deficnición variables para factura	
 		sub_total_factura = sub_total_factura + (total_dolares[i] * cantidades[i]);
 		total_con_envio = sub_total_factura + factura_total * multiplicador;
 		envio_factura = sub_total_factura * multiplicador;
@@ -97,7 +92,6 @@ function nuevo_calculo(){
 	cantidades_inputs[0] = cantidad_input1;
 	cantidades_inputs[1] = cantidad_input2;
 	
-	console.log(cantidades_inputs);
 	limpiar_pantalla();
 	mostrar_en_pantalla(cantidades_inputs);
 }
@@ -152,8 +146,6 @@ document.addEventListener("DOMContentLoaded", function(e){
 				factura_total = factura_total + sub_total;
 			}
 			// factura_total = parseInt(factura_sub_total.reduce((a, b) => a + b, 0));
-			console.log(total_dolares);
-			console.log(factura_total);
 			mostrar_en_pantalla(cantidades_inputs);
         }
 	})
