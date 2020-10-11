@@ -3,24 +3,28 @@
 
 
 //FUNCION PARA MOSTRAR ARTICULOS DEL CARRITO
-var articulo = [];
 function mostrar_en_pantalla(cantidades){
 	//variables html para imprimir carrito y factura
 	let html = '';
 	let html_factura = '';
 	//variables para mostrar en la factura, ambas inician en cero, se toma usuario como nombre de cliente
-	var FACTURA_total = 0;
-	var FACTURA_sub_total = 0;
 	var CLIENTE = localStorage.getItem("user");
 	var ENVIO_tipo = "";
 	var multiplicador = "";
-	var IVA = 0.22;
+	var sub_total_factura = 0;
+	var total_con_envio = 0;
+	var envio_factura = 0;
+	
+	// //redefinición de variables para cálculos
+	// var cantidad_prod_1 = parseInt(document.getElementById("cantidad0").value);
+	// var cantidad_prod_2 = parseInt(document.getElementById("cantidad1").value);
+	
 
+	//especificación de envío
 	//seleccion de envio de producto goldradio
 	var ENVIO_gold = document.getElementById("goldradio").checked;
 	var ENVIO_premium = document.getElementById("premiumradio").checked;
 	var ENVIO_standar = document.getElementById("standardradio").checked;
-
 	//dependiendo el radibutton que está apretado elijo el tipo de envío y porcentaje que corresponde
 	if (ENVIO_gold){
 		multiplicador = 0.15;
@@ -33,13 +37,10 @@ function mostrar_en_pantalla(cantidades){
 		ENVIO_tipo = "Estándar(5%)"
 	}
 
-    for (let i = 0; i < cantidades.length; i++) {
+	for (let i = 0; i < cantidades.length; i++) {
 		//valores de los productos para mostrar en el carrito
 		//var no_grabado = "";
 				
-		//SUB TOTAL
-		//FACTURA_sub_total = (FACTURA_total+(FACTURA_total*multiplicador)) /1.22;
-
         html = `
 				<div class="panel-body">
 					<div class="row">
@@ -65,15 +66,19 @@ function mostrar_en_pantalla(cantidades){
 					<hr>
             `
 			document.getElementById('lista').innerHTML += html;
-			
+
+		//redeficnición variables para factura	
+		sub_total_factura = sub_total_factura + (total_dolares[i] * cantidades[i]);
+		total_con_envio = sub_total_factura + factura_total * multiplicador;
+		envio_factura = sub_total_factura * multiplicador;
+
 		//escribo los valores en la factura, desglosando cada costo por separado
 		html_factura = `
 			<br>
 				<p><strong> CLIENTE:</strong> ${CLIENTE}</p>				
-				<p><strong> ENVIO:</strong> ${ENVIO_tipo} - ${(FACTURA_total*multiplicador).toFixed(2)} U$S</p>
-				<p><strong> SUB TOTAL:</strong> ${FACTURA_sub_total.toFixed(2)} U$S</p>
-				<p><strong> IVA</strong>(22%)<strong>:</strong> ${(FACTURA_total+(FACTURA_total*multiplicador)-FACTURA_sub_total).toFixed(2)} U$S</p>
-				<p class="renglon" id="Total"><strong> TOTAL:</strong> ${FACTURA_total+(FACTURA_total*multiplicador)} U$S</p><br>
+				<p><strong> ENVIO:</strong> ${ENVIO_tipo} - ${envio_factura.toFixed(2)} U$S</p>						
+				<p><strong> SUB TOTAL:</strong> ${(sub_total_factura).toFixed(2)} U$S</p>	
+				<p class="renglon" id="Total"><strong> TOTAL:</strong> ${total_con_envio.toFixed(2)} U$S</p><br>
 				<button class="btn btn-primary btn-lg" type="submit">Finalizar compra</button>
 		`
 		document.getElementById("elementos_factura").innerHTML = html_factura;
@@ -84,25 +89,27 @@ function limpiar_pantalla() {
 	html = ``
 	document.getElementById('lista').innerHTML = html;
 }
-
+//funcion que se ejecuta cuando cambia el input
+function nuevo_calculo(){
+	var cantidad_input1 = parseInt(document.getElementById("cantidad0").value);
+	var cantidad_input2 = parseInt(document.getElementById("cantidad1").value);
+	
+	cantidades_inputs[0] = cantidad_input1;
+	cantidades_inputs[1] = cantidad_input2;
+	
+	console.log(cantidades_inputs);
+	limpiar_pantalla();
+	mostrar_en_pantalla(cantidades_inputs);
+}
 //variables para cantidades y costos
-var FACTURA_sub_total = [];
+var factura_total = "";
 var unitario = [];
 var total_dolares = [];
 var cantidades_inputs = [];
 var nombres = [];
 var imagenes = [];
-
-//funcion que se ejecuta cuando cambia el input
-function nuevo_calculo(){
-	var cantidad_input1 = parseInt(document.getElementById("cantidad0").value);
-	var cantidad_input2 = parseInt(document.getElementById("cantidad1").value);
-	cantidades_inputs[0] = cantidad_input1;
-	cantidades_inputs[1] = cantidad_input2;
-	console.log(cantidades_inputs);
-	limpiar_pantalla();
-	mostrar_en_pantalla(cantidades_inputs);
-}
+var ENVIO_tipo = "Gold(15%)";
+var multiplicador = 0.15;
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
@@ -112,11 +119,14 @@ document.addEventListener("DOMContentLoaded", function(e){
         if (resultado.status === "ok"){
 			informacion_carrito = resultado.data;
 			limpiar_pantalla();
+
+			//cantidad de productos en el carrito
 			var cantidad_en_carro = informacion_carrito.articles.length+1;
 			document.getElementById("cont").innerHTML = cantidad_en_carro;
 			document.getElementById("carito").innerHTML = cantidad_en_carro;
 
-			//inicializacion
+			//inicializacion de variables 
+			factura_total = parseInt(0);
 			var cantidad_input1 = 1;
 			var cantidad_input2 = 1;
 			cantidades_inputs.push(cantidad_input1);
@@ -135,10 +145,20 @@ document.addEventListener("DOMContentLoaded", function(e){
 				}
 					total_dolares.push(unitario[i]*cantidades_inputs[i])
 				}
+
+			//obtener total 
+			for (let i = 0; i < total_dolares.length; i++) {
+				const sub_total = total_dolares[i];
+				factura_total = factura_total + sub_total;
+			}
+			// factura_total = parseInt(factura_sub_total.reduce((a, b) => a + b, 0));
+			console.log(total_dolares);
+			console.log(factura_total);
 			mostrar_en_pantalla(cantidades_inputs);
         }
 	})
 	document.getElementById("premiumradio").addEventListener("click", function(){
+		limpiar_pantalla();
 		mostrar_en_pantalla(cantidades_inputs);
 	});
 	
@@ -154,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 //CART_INFO_URL
 //"https://japdevdep.github.io/ecommerce-api/cart/654.json"
 //{"articles": [{"name": "Pino de olor para el auto","count": 2,"unitCost": 100,"currency": "UYU", "src": "img/tree1.jpg"},
-//{"name": "Suzuki Celerio","count": 1,"unitCost": 12500,"currency": "USD","src": "img/prod3.jpg"}]}
+//{"name": "Suzuki Celerio","count": 1,"unitCost": 12500,"curren cy": "USD","src": "img/prod3.jpg"}]}
 //<button id="add_" style="font-size: smaller;" type="button" class="btn" data-dismiss="modal"><i class="fas fa-plus"></i></button><button id="quit_" style="font-size: smaller;" type="button" class="btn" data-dismiss="modal"><i class="fas fa-minus"></i></button>
 //<strong>Cantidad:</strong> <input id="cantidad${i}" onchange="calcular(${i});" type="number" class="form-control input-sm" value="${cantidad_producto}" min="0">
 //function calcular(cantidad_input) {
@@ -166,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 // 	html = "";
 // 	for (let i = 0; i < cantidades.length; i++) {
 // 		const cantidad = cantidades[i];
-
-		
+// // <p><strong> IVA</strong>(22%)<strong>:</strong> ${(factura_total*0.22).toFixed(2)} U$S</p>
+//<p><strong> SUB TOTAL:</strong> ${(factura_total).toFixed(2)} U$S</p>		
 // 	}
 // <button id="add_${i}" onclick="aumentar_cantidad_${i}();" style="font-size: smaller;" type="button" class="btn" data-dismiss="modal" min="0"><i class="fas fa-plus"></i></button><button id="quit_${i}" onclick="disminuir_cantidad_${i}();" style="font-size: smaller;" type="button" class="btn" data-dismiss="modal" min="0"><i class="fas fa-minus"></i></button>
