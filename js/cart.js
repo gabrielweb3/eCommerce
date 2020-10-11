@@ -33,8 +33,6 @@ function mostrar_en_pantalla(cantidades){
 	}
 
 	for (let i = 0; i < cantidades.length; i++) {
-		//valores de los productos para mostrar en el carrito
-		//var no_grabado = "";
 				
         html = `
 				<div class="panel-body">
@@ -88,10 +86,8 @@ function limpiar_pantalla() {
 function nuevo_calculo(){
 	var cantidad_input1 = parseInt(document.getElementById("cantidad0").value);
 	var cantidad_input2 = parseInt(document.getElementById("cantidad1").value);
-	
 	cantidades_inputs[0] = cantidad_input1;
 	cantidades_inputs[1] = cantidad_input2;
-	
 	limpiar_pantalla();
 	mostrar_en_pantalla(cantidades_inputs);
 }
