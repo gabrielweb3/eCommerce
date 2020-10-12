@@ -14,6 +14,7 @@ function mostrar_en_pantalla(cantidades){
 	var sub_total_factura = 0;
 	var total_con_envio = 0;
 	var envio_factura = 0;
+	var cantidad_total_articulos = 0;
 	
 	//especificación de envío
 	//seleccion de envio de producto goldradio
@@ -60,7 +61,11 @@ function mostrar_en_pantalla(cantidades){
             `
 			document.getElementById('lista').innerHTML += html;
 
-		//deficnición variables para factura	
+		//cantidad de variables en el carro
+		cantidad_total_articulos = cantidad_total_articulos + cantidades[i];
+		document.getElementById("cont").innerHTML = document.getElementById("carito").innerHTML =  cantidad_total_articulos;
+
+		//definición variables para factura	
 		sub_total_factura = sub_total_factura + (total_dolares[i] * cantidades[i]);
 		total_con_envio = sub_total_factura + factura_total * multiplicador;
 		envio_factura = sub_total_factura * multiplicador;
@@ -111,9 +116,8 @@ document.addEventListener("DOMContentLoaded", function(e){
 			limpiar_pantalla();
 
 			//cantidad de productos en el carrito
-			var cantidad_en_carro = informacion_carrito.articles.length+1;
-			document.getElementById("cont").innerHTML = cantidad_en_carro;
-			document.getElementById("carito").innerHTML = cantidad_en_carro;
+			var cantidad_en_carro = informacion_carrito.articles.length;
+			document.getElementById("cont").innerHTML = document.getElementById("carito").innerHTML =  cantidad_en_carro;
 
 			//inicializacion de variables 
 			factura_total = parseInt(0);
