@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <title>eMercado - Todo lo que busques está aquí</title>
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/dropzone.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/estilos_producto.css" rel="stylesheet">
+    <link href="css/dropzone.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
+    <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css"> -->
+    <!-- <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/"> -->
+
+</head>
+
+<style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+   body {margin-top: 20px;}
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+    .factura{
+      position: relative;
+      top: 5%;
+      right: 15%;
+      float: right;
+      border: 1px solid rgb(188, 232, 241);
+      width: 300px;
+      height: 370px;
+      text-align: center;
+    }
+    #fact_titulo{
+      background-color: rgb(217, 237, 247);
+      color: rgb(49, 112, 143);
+      padding: 5px;
+      border: 1px solid rgb(188, 232, 241);
+    }
+    .renglon{
+      background-color: rgb(217, 237, 247);
+      padding: 15px;
+    }
+    
+</style>
+
+<body>
+    <!-- barra superior -->
+    <nav class="site-header sticky-top py-1 bg-dark">
+        <div id="barrasuperior" class="container d-flex flex-column flex-md-row justify-content-between">
+          <a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
+          <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
+          <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
+          <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
+          <div class="usuario">
+            
+            <div class="dropdown" style="float:right;">
+              <button class="dropbtn"><i class="fas fa-user"></i><span id="user"></span>!<br></button>
+              <div class="dropdown-content">
+                <a href="cart.html">Carrito <span id="carito" class="badge badge-light"></span></a>
+                <a href="my-profile.html">Mi perfil</a>
+                <div class="dropdown-divider"></div>
+                <a href="#"><button id="bye" onclick="localStorage.clear(); alert('Hasta la próxima!'); location.href='login.html';">Salir</button></a>
+                <!-- <button id="bye" onclick="localStorage.clear(); alert('Hasta la próxima!'); location.href='login.html';">Salir</button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- factura  -->
+      <div class="factura">
+        <div id="fact_titulo">
+          <h4> Su factura</h4>
+        </div>
+        <div id="elementos_factura"></div>
+      </div>
+
+      <!-- cabecera carrito  -->
+      <div class="container p-5">    
+        <div class="row">
+            <div class="col-xs-8">
+              <div class="panel panel-info">
+                <div class="panel-heading">
+    
+                  <div class="panel-title">
+                    <div class="row">
+                      <div class="col-xs-6">
+                        <h4 style="text-align: center;"><span class="glyphicon glyphicon-shopping-cart"></span> El carrito contiene <span class="badge" id="cont"></span> elementos </h4>
+                      </div>
+                      <div class="col-xs-6">
+                        <button type="button" class="btn btn-primary btn-sm btn-block">
+                          <a href="/products.html"><span class="glyphicon glyphicon-share-alt"></span></a> Continua comprando...
+                        </button>
+                      </div>
+                    </div>
+                  </div>          
+    
+                </div>
+                <!-- lista de articulos en el carrito  -->
+                <div id="lista"></div>   
+              </div>
+            </div>
+        </div>
+
+        <!-- tipos de envio  -->
+        <div>
+            <hr class="mb-4">
+                <h5 class="mb-3">Tipo de Envío</h5>
+                <div class="d-block my-3">
+                  <div class="custom-control custom-radio">
+                    <input id="goldradio" name="publicationType" type="radio" class="custom-control-input" checked="" required="">
+                    <label class="custom-control-label" for="goldradio">Gold (15%)</label>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input id="premiumradio" name="publicationType" type="radio" class="custom-control-input" required="">
+                    <label class="custom-control-label" for="premiumradio">Premium (7%)</label>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input id="standardradio" name="publicationType" type="radio" class="custom-control-input" required="">
+                    <label class="custom-control-label" for="standardradio">Estándar (5%)</label>
+                  </div>
+                  
+                  <!-- ventana modal  -->
+                  <div class="ventana_modal">
+                  <!-- boton para abrir ventana modal de condiciones de envio  -->
+                    <a href="#modal" id="show_modal">Condiciones de envío</a>
+                  <!-- aca poner ventana modal de tipo de envio -->
+                    <aside id="modal" class="modal">
+                        <div class="content-modal">
+                            <header>
+                                <a href="#" class="close-modal">x</a>
+                                <h3>Condiciones de envío</h3>
+                            </header>
+                            <article></article>
+                        </div>
+                        <a href="#" class="btn-close-modal"></a>
+                    </aside>
+                    
+                  </div>
+              </div>
+            </div>
+
+            <!-- pie de pagina -->
+            <footer class="text-muted">
+                <div class="container">
+                    <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
+                    <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+                </div>
+              </footer>
+         
+              <!-- spiner -->
+              <div id="spinner-wrapper">
+                <div class="lds-ring">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="js/dropzone.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/cart.js"></script>              
+    <script>
+        var usuario = localStorage.getItem("user"); //getItem Obtiene el dato de la posición "usuario"
+        document.getElementById('user').innerHTML = usuario;
+    </script>
+</body>
+</html>

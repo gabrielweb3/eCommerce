@@ -226,6 +226,7 @@
     background-image: url(img/cover_back.png);
     background-size: cover;
     background-repeat: no-repeat;
+    position: relative;
 	top: -10px;
     height: 100%;
     width: 100%;
@@ -372,3 +373,78 @@
 ::-moz-input-placeholder{
    color: rgba(255,255,255,0.6);
 }
+.modal{
+  position: fixed;
+  top: -100vh;
+  left: 0;
+  z-index: 99999;
+  background: #ebe5e5;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.modal .content-modal{
+  width: 100%;
+  max-width: 500px;
+  position: fixed;
+  left: 50%;
+  top: -100vh;
+  transition: top 0.35s ease;
+  margin-left: -250px;
+  background: white;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  border-radius: 2px;
+  z-index: 99999;
+}
+.modal h3{
+  padding: 0.5em;
+  text-align: center;
+  color: #4CAF50;
+  margin: 0;
+}
+.modal article{
+  height: 300px;
+  background: #a18d6c;
+}
+.close-modal{
+  color: antiquewhite;
+  position: absolute;
+  top: 0.2em;
+  right: 0.375em;
+  margin: 0;
+  padding: 5px;
+  font-weight: bold;
+  font-size: 1.5em;
+  text-decoration: none;
+}
+.modal a:hover{
+  color: cadetblue;
+}
+.modal:target{
+  opacity: 1;
+  top:0;
+}
+.modal .btn-close.modal{
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99991;
+}
+.modal:target .content-modal{
+  top: 50px;
+  transition: top 0.35s ease;
+}
+@media (max-width: 796px){
+  .modal .content-modal{
+    width: 90%;
+    max-width: none;
+    left: 5%;
+    margin-left: 0;
+  }
+  
+}
+
+
+
