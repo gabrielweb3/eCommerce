@@ -223,3 +223,117 @@ span.price {
     </div>
     <button class="btn btn-primary btn-sm" type="submit">Realizar transferencia</button>
   </form>
+
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">                      
+      <!-- Modal content-->
+      <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Tarjeta de crédito</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>                            
+      </div>
+      <!-- <d<h5 class="mb-3">Tarjeta de crédito</h5> -->
+      <form class="needs-validation" novalidate>
+          <div class="form-row">
+            <div class="col-md-4 mb-3">
+              <label for="validationCustom01">Nombres</label>
+              <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Cacho Lee"
+                required>
+              <div class="valid-feedback">
+                Ok!
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="validationCustom02">Apellidos</label>
+              <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="Obama Rodriguez"
+                required>
+              <div class="valid-feedback">
+              Ok!
+              </div>
+            </div>      
+          </div>
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom03">Número de tarjeta</label>
+              <input type="text" class="form-control" id="validationCustom03" placeholder="xxxx-xxxx-xxxx-xxxx" required>
+              <div class="invalid-feedback">
+                Ok!
+              </div>
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="validationCustom04">Código de seguridad</label>
+              <input type="text" class="form-control" id="validationCustom04" placeholder="xxx" required>
+              <div class="invalid-feedback">
+                Ok!
+              </div>
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="validationCustom05">Vencimiento</label>
+              <input type="month" class="form-control" id="validationCustom05" placeholder="01/2020" required>
+              <div class="invalid-feedback">
+                Ok!
+              </div>
+            </div>
+          </div>
+          <button id="finalizar" onclick="finalizar_compra();" class="btn btn-primary btn-sm" type="submit">Finalizar compra</button>
+        </form>
+                 
+  </div>
+  </div>  
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+      </div>                        
+    </div>
+    </div>
+
+
+  <div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">                      
+					<!-- Modal content-->
+					<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Transferencia bancaria</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>                            
+					</div>
+					<div class="modal-body">            
+            <form class="needs-validation" novalidate>
+            <div class="form-row">
+              <div class="col-md-4 mb-3">
+                <label for="validationCustom01">Titular cuenta</label>
+                <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Cacho Lee"
+                  required>
+                <div class="valid-feedback">
+                  Ok!
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="validationCustom02">Banco</label>
+                <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="American Bank"
+                  required>
+                <div class="valid-feedback">
+                Ok!
+                </div>
+              </div>      
+            </div>
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <label for="validationCustom03">Número de cuenta</label>
+                <input type="text" class="form-control" id="validationCustom03" placeholder="xxxx-xxxx-xxxx-xxxx" required>
+                <div class="invalid-feedback">
+                  Ok!
+                </div>
+              </div>
+            </div>
+            <button id="finalizar" onclick="finalizar_compra();" class="btn btn-primary btn-sm" type="submit">Finalizar compra</button>
+          </form>
+          </div>
+        </div>  
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+          </div>       
+                           
+			</div>
+	  </div>  

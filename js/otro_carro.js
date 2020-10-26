@@ -1,6 +1,6 @@
 //SCRIPT QUE CONTROLA EL FUNCIONAMIENTO DEL CARRITO DE PRODUCTOS
 
-var contenido_carrito = [];
+
 
 //FUNCION PARA MOSTRAR ARTICULOS DEL CARRITO
 function mostrar_en_pantalla(array){
@@ -15,8 +15,10 @@ function mostrar_en_pantalla(array){
 	var sub_total_factura = 0;
 	var total_con_envio = 0;
 	var envio_factura = 0;
-	var cantidad_total_articulos = 0;
-	var costo_unit = 0;
+    var cantidad_total_articulos = 0;
+    // var factura_total = 0;
+
+	// console.log("nombres 2: " + nombres);
 	
 	//especificación de envío
 	//seleccion de envio de producto goldradio
@@ -36,13 +38,7 @@ function mostrar_en_pantalla(array){
 	}
 
 	for (let i = 0; i < array.length; i++) {
-
-		//checkeo de que la moneda sea dolares
-		if(array[i].currency != "USD"){
-			costo_unit = array[i].unitCost/40;}
-		else{costo_unit = array[i].unitCost}
-			
-
+				
         html = `
 				<div class="panel-body">
 					<div class="row">
@@ -52,14 +48,14 @@ function mostrar_en_pantalla(array){
 						</div>
 						<div class="col-xs-6">
 							<div class="col-xs-6 text-right">
-								<h6 id="costo_unitario"><strong>Costo unitario:</strong><br> ${costo_unit} U$S</h6>
-								<h6 id="costo_total"><strong>TOTAL:</strong><br> ${costo_unit*array[i].count} U$S</h6>							
+								<h6 id="costo_unitario"><strong>Costo unitario:</strong><br> ${array[i].unitCost} U$S</h6>
+								<h6 id="costo_total"><strong>TOTAL:</strong><br> ${array[i].unitCost*array[i].count} U$S</h6>							
 							</div>							
 							<div class="col-xs-4">
-								<strong>Cantidad:</strong> <input id="cantidad${i}" onchange="nuevo_calculo();" type="number" class="form-control input-sm" value="${array[i].count}" min="0">
+								<strong>Cantidad:</strong> <input id="cantidad${i}" type="number" class="form-control input-sm" value="${array[i].count}" min="0">
 							</div>							
 							<div class="col-xs-2">
-								<button type="button" class="btn btn-link btn-xs" onclick="borrar(${i});">
+								<button type="button" class="btn btn-link btn-xs" onclick="eliminar_producto(${i});">
 									<span class="glyphicon glyphicon-trash"> </span>
 								</button>
 						</div><br><br><br>	
@@ -74,9 +70,9 @@ function mostrar_en_pantalla(array){
 		document.getElementById("cont").innerHTML = document.getElementById("carito").innerHTML =  cantidad_total_articulos;
 
 		//definición variables para factura	
-		sub_total_factura = sub_total_factura + (costo_unit * array[i].count);
-		total_con_envio = sub_total_factura + (sub_total_factura * multiplicador);
-		envio_factura = sub_total_factura * multiplicador;
+        sub_total_factura = sub_total_factura + (array[i].unitCost * array[i].count);    
+        envio_factura = sub_total_factura * multiplicador;
+        total_con_envio = sub_total_factura + envio_factura;
 
 		//escribo los valores en la factura, desglosando cada costo por separado
 		html_factura = `
@@ -111,27 +107,34 @@ function limpiar_pantalla() {
 	html = ``
 	document.getElementById('lista').innerHTML = html;
 }
-//funcion que se ejecuta cuando cambia algunas de las cantidades en el input
-function nuevo_calculo(){
-	var cantidades_nuevas = [];
-	if (document.getElementById("cantidad0") != null){ //se checkea que el elemento exista antes de intentar extraer el valor
-		cantidades_nuevas.push(parseInt(document.getElementById("cantidad0").value));
-	}
-	if (document.getElementById("cantidad1") != null){
-		cantidades_nuevas.push(parseInt(document.getElementById("cantidad1").value));
-	}	
-	for (let i = 0; i < cantidades_nuevas.length; i++) {
-		contenido_carrito[i].count = cantidades_nuevas[i];		
-	}
+
+function eliminar_producto(producto){
+	console.log(informacion_carrito.articles[producto]);
+	
+	informacion_carrito.articles.splice(producto,1);
+	// cantidad_input1 = parseInt(document.getElementById('cantidad0').value);
+	// cantidad_input2 = parseInt(document.getElementById('cantidad1').value);
+	// cantidades_inputs[0] = cantidad_input1;
+	// cantidades_inputs[1] = cantidad_input2;
 	limpiar_pantalla();
-	mostrar_en_pantalla(contenido_carrito);
+	// for (let i = 0; i < cantidades_inputs.length; i++) {
+	// 	if (cantidades_inputs[i] == null){
+	// 		cantidades_inputs[i] == 0;
+	// 	}		
+	// }
+	mostrar_en_pantalla([0,1]);
 }
-//funcion para borrar articulos con el boton de la papelerita
-function borrar(i) {
-	contenido_carrito.splice(i,1);
-	limpiar_pantalla();
-	mostrar_en_pantalla(contenido_carrito);
-}
+
+
+//variables para cantidades y costos
+// var factura_total = "";
+// var unitario = [];
+// var total_dolares = [];
+// var cantidades_inputs = [];
+// var nombres = [];
+// var imagenes = [];
+// var ENVIO_tipo = "Gold(15%)";
+// var multiplicador = 0.15;
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
@@ -140,60 +143,55 @@ document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(CART_INFO_2).then(function(resultado){
         if (resultado.status === "ok"){
 			informacion_carrito = resultado.data;
+			limpiar_pantalla();
+
+			//cantidad de productos en el carrito 
+			var cantidad_en_carro = informacion_carrito.articles.length;
+			document.getElementById("cont").innerHTML = document.getElementById("carito").innerHTML =  cantidad_en_carro;
 			
-			contenido_carrito = informacion_carrito.articles;
-			mostrar_en_pantalla(contenido_carrito);
+			mostrar_en_pantalla(informacion_carrito.articles);
         }
 	})
 	document.getElementById("premiumradio").addEventListener("click", function(){
 		limpiar_pantalla();
-		mostrar_en_pantalla(contenido_carrito);
+		mostrar_en_pantalla(cantidades_inputs);
 	});
 	
 	document.getElementById("standardradio").addEventListener("click", function(){
 		limpiar_pantalla();
-		mostrar_en_pantalla(contenido_carrito);
+		mostrar_en_pantalla(cantidades_inputs);
 	})
 	document.getElementById("goldradio").addEventListener("click", function(){
 		limpiar_pantalla();
-		mostrar_en_pantalla(contenido_carrito);
-	})
+		mostrar_en_pantalla(cantidades_inputs);
+    })
+    document.getElementById("cantidad0").addEventListener("click", function(){
+        limpiar_pantalla();
+        informacion_carrito.articles[0].count = parseInt(document.getElementById('cantidad0').value);
+        mostrar_en_pantalla(informacion_carrito.articles);
+    })
+    document.getElementById("cantidad1").addEventListener("click", function(){
+        limpiar_pantalla();
+        informacion_carrito.articles[1].count = parseInt(document.getElementById("cantidad1").value);
+        mostrar_en_pantalla(informacion_carrito.articles);
+    })
 });
-
-//funcion que se activa al precionar el botón de finalizar compra incluidos en los modales de medios de pago
 function finalizar_compra() {
-	//se realiza el checkeo de un elemento de la ventana de envío para elegir que alert mostrar
-	if (document.getElementById("invalidCheck").checked || document.getElementById("validationCustom05").value != "")   {
-		Swal.fire({
-			title: 'Compra completada!, disfruta de tus productos!',
-			width: 600,
-			padding: '3em',
-			background: '#fff url(/images/trees.png)',
-			backdrop: `
-			  rgba(0,0,123,0.4)
-			  url("https://media.tenor.com/images/5b383382c5772096baf2afd6d0c48900/tenor.gif")
-			  left top
-			  repeat
-			`
-		  });
-		//en caso de que el botón no esté checkeado avisa al usuario a trves de un alert y se deja que se sigan llenando o checkando campos
-	}else{
-		Swal.fire({
-			title: 'Espera!, aun falta información por completar',
-			width: 600,
-			padding: '3em',
-			background: '#fff url(/images/trees.png)',
-			backdrop: `
-			  rgba(0,0,123,0.4)
-			  url("/images/nyan-cat.gif")
-			  left top
-			  repeat
-			`
-		  });
-	}	
-	}
+	Swal.fire({
+		title: 'Compra finalizada! disfrute sus productos',
+		width: 600,
+		padding: '3em',
+		background: '#fff url(/images/trees.png)',
+		backdrop: `
+		  rgba(0,0,123,0.4)
+		  url("/images/nyan-cat.gif")
+		  left top
+		  repeat
+		`
+	  });
+}
 
-//funcion de validacion de campos de envío, función extraida enteramente de bootstrap o semejantes
+//funcion de validacion de campos de envío
 (function() {
 	'use strict';
 	window.addEventListener('load', function() {
@@ -212,86 +210,73 @@ function finalizar_compra() {
 	}, false);
   })();
 
+  //funcion de validacion de campos de medio de pago tarjeta
+// (function() {
+// 	'use strict';
+// 	window.addEventListener('load', function() {
+// 	  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+// 	  var forms = document.getElementsByClassName('needs-validation_2');
+// 	  // Loop over them and prevent submission
+// 	  var validation = Array.prototype.filter.call(forms, function(form) {
+// 		form.addEventListener('submit', function(event) {
+// 		  if (form.checkValidity() === false) {
+// 			event.preventDefault();
+// 			event.stopPropagation();
+// 		  }
+// 		  form.classList.add('was-validated');
+// 		}, false);
+// 	  });
+// 	}, false);
+//   })();
+
+  //modal tipo de envío
+  function tipos_envio(){
+	  let modal = `
+				<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog">                      
+					<!-- Modal content-->
+					<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Tipos de pago</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>                            
+					</div>
+					<div class="modal-body">
+						<div class="container">
+						<div class="row">
+							<h5 class="text-warning">Gold (15%)</h5>
+							<p class="muted text-justify"> Tu producto será enviado bajo garantía de la empresa transportadora, en un periodo tiempo de 5 días hábiles.</p>
+						</div>
+						<hr>
+						<div class="row">
+							<h5 class="text-primary">Stándar (7%)</h5>
+							<p class="muted text-justify"> Tu producto será enviado bajo garantía de la empresa transportadora, en un periodo tiempo de 10 días hábiles.</p>
+						</div>
+						<hr>
+						<div class="row">
+							<h5 class="text-secondary">Estándar (5%)</h5>
+							<p class="muted text-justify"> Tu producto será enviado sin garantía empresarial, en un periodo tiempo de 15 días hábiles.</p>
+						</div>
+					</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+					</div>                        
+				</div>
+				</div>  
+	  `
+	  document.getElementById("modal_envio").innerHTML = modal;
+  }
   //modal medios de pagos
   function medios_pago(){	  
 	despejar_medio_pago();
 	  let modal_2 = `
-	  <div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog">                      
-					<!-- Modal content-->
-					<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">Tarjeta de crédito</h4>
-						<button type="button" class="close" data-dismiss="modal">&times;</button>                            
-					</div>
-					<div class="modal-body">            
-					<form class="needs-validation" novalidate>
-						<div class="form-row">
-						<div class="col-md-4 mb-3">
-							<label for="validationCustom01">Nombres</label>
-							<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Cacho Lee"
-							required>
-							<div class="valid-feedback">
-							Ok!
-							</div>
-						</div>
-						<div class="col-md-4 mb-3">
-							<label for="validationCustom02">Apellidos</label>
-							<input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="Obama Rodriguez"
-							required>
-							<div class="valid-feedback">
-							Ok!
-							</div>
-						</div>      
-						</div>
-						<div class="form-row">
-						<div class="col-md-6 mb-3">
-							<label for="validationCustom03">Número de tarjeta</label>
-							<input type="text" class="form-control" id="validationCustom03" placeholder="xxxx-xxxx-xxxx-xxxx" required>
-							<div class="invalid-feedback">
-							Ok!
-							</div>
-						</div>
-						<div class="col-md-3 mb-3">
-							<label for="validationCustom04">Código de seguridad</label>
-							<input type="text" class="form-control" id="validationCustom04" placeholder="xxx" required>
-							<div class="invalid-feedback">
-							Ok!
-							</div>
-						</div>
-						<div class="col-md-3 mb-3">
-							<label for="validationCustom05">Vencimiento</label>
-							<input type="month" class="form-control" id="validationCustom05" placeholder="01/2020" required>
-							<div class="invalid-feedback">
-							Ok!
-							</div>
-						</div>
-						</div>
-						<button id="finalizar" onclick="finalizar_compra();" class="btn btn-primary btn-sm" type="submit">Finalizar compra</button>
-					</form>                   
-         		</div>
-        	</div>  
-		</div>
-        </div> 
-	  `
-	  document.getElementById("medios_pago").innerHTML = modal_2;
-  }
-  function transferencia_pago() {
-	despejar_medio_pago();
-	  let html_trans = `
-	  <div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog">                      
-					<!-- Modal content-->
-					<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">Transferencia bancaria</h4>
-						<button type="button" class="close" data-dismiss="modal">&times;</button>                            
-					</div>
-					<div class="modal-body">            
-            <form class="needs-validation" novalidate>
+	  
+	  <h5 class="mb-3">Tarjeta de crédito</h5>
+        <form class="needs-validation" novalidate>
             <div class="form-row">
               <div class="col-md-4 mb-3">
-                <label for="validationCustom01">Titular cuenta</label>
+                <label for="validationCustom01">Nombres</label>
                 <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Cacho Lee"
                   required>
                 <div class="valid-feedback">
@@ -299,8 +284,8 @@ function finalizar_compra() {
                 </div>
               </div>
               <div class="col-md-4 mb-3">
-                <label for="validationCustom02">Banco</label>
-                <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="American Bank"
+                <label for="validationCustom02">Apellidos</label>
+                <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="Obama Rodriguez"
                   required>
                 <div class="valid-feedback">
                 Ok!
@@ -309,28 +294,77 @@ function finalizar_compra() {
             </div>
             <div class="form-row">
               <div class="col-md-6 mb-3">
-                <label for="validationCustom03">Número de cuenta</label>
+                <label for="validationCustom03">Número de tarjeta</label>
                 <input type="text" class="form-control" id="validationCustom03" placeholder="xxxx-xxxx-xxxx-xxxx" required>
                 <div class="invalid-feedback">
-                  Ingrese la cuenta emisora!
+                  Ok!
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="validationCustom04">Código de seguridad</label>
+                <input type="text" class="form-control" id="validationCustom04" placeholder="xxx" required>
+                <div class="invalid-feedback">
+                  Ok!
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="validationCustom05">Vencimiento</label>
+                <input type="month" class="form-control" id="validationCustom05" placeholder="01/2020" required>
+                <div class="invalid-feedback">
+                  Ok!
                 </div>
               </div>
             </div>
             <button id="finalizar" onclick="finalizar_compra();" class="btn btn-primary btn-sm" type="submit">Finalizar compra</button>
           </form>
-		  </div>
-		  </div>
-		 </div>  
-		</div>		
-  		</div>       
+                   
+    </div>
+    </div>  
+	  `
+	  document.getElementById("medios_pago").innerHTML = modal_2;
+  }
+  function transferencia_pago() {
+	despejar_medio_pago();
+	  let html_trans = `
+	  <h5 class="mb-3">Transferencia bancaria</h5>
+	  <form class="needs-validation" novalidate>
+    <div class="form-row">
+      <div class="col-md-4 mb-3">
+        <label for="validationCustom01">Titular cuenta</label>
+        <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Cacho Lee"
+          required>
+        <div class="valid-feedback">
+          Ok!
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="validationCustom02">Banco</label>
+        <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="American Bank"
+          required>
+        <div class="valid-feedback">
+        Ok!
+        </div>
+      </div>      
+    </div>
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+        <label for="validationCustom03">Número de cuenta</label>
+        <input type="text" class="form-control" id="validationCustom03" placeholder="xxxx-xxxx-xxxx-xxxx" required>
+        <div class="invalid-feedback">
+          Ok!
+        </div>
+      </div>
+    </div>
+    <button id="finalizar" onclick="finalizar_compra();" class="btn btn-primary btn-sm" type="submit">Finalizar compra</button>
+  </form>
 	  `
 	  document.getElementById("medios_pago_giro").innerHTML = html_trans;
   }
-  //funcion uncamente util para limpiar la pantalla para mostrar los medios de pago
   function despejar_medio_pago() {
 	  document.getElementById("medios_pago_giro").innerHTML = "";
 	  document.getElementById("medios_pago").innerHTML = ""; 
   }
+
 //CART_INFO_URL
 //"https://japdevdep.github.io/ecommerce-api/cart/654.json"
 //{"articles": [{"name": "Pino de olor para el auto","count": 2,"unitCost": 100,"currency": "UYU", "src": "img/tree1.jpg"},
@@ -365,41 +399,5 @@ Mariana
 <script src="js/dropzone.js"></script>
 <script src="js/init.js"></script>
 <script src="js/cart.js"></script> */
-
-//console.log("producto a eliminar: "+producto);
-			//elimino producto seleccionado
-			// informacion_carrito.articles.splice(producto,1);
-			// console.log("largo de vector " + informacion_carrito.articles.length);
-			// console.log(informacion_carrito.articles);
-
-			// //cantidad de productos en el carrito 
-			// var cantidad_en_carro = informacion_carrito.articles.length;
-			// var array_cantidad = [];
-			// array_cantidad.push(cantidad_en_carro);
-			// document.getElementById("cont").innerHTML = document.getElementById("carito").innerHTML =  cantidad_en_carro;
-			// factura_total = parseInt(0);
-			// for (let i = 0; i < informacion_carrito.articles.length; i++) {
-			// 	const element = informacion_carrito.articles[i];
-				
-			// 	nombres.push(element.name);
-			// 	imagenes.push(element.src);
-
-			// 	//hago un filtro para la moneda, que tome el valor de los productos en dólares
-			// 	if (element.currency === "USD"){
-			// 		unitario.push(element.unitCost);
-			// 	}else{
-			// 		unitario.push(element.unitCost/40);
-			// 	}
-			// 		total_dolares.push(unitario[i]*cantidad_en_carro)
-			// 	}
-
-			// //obtener total 
-			// for (let i = 0; i < total_dolares.length; i++) {
-			// 	const sub_total = total_dolares[i];
-			// 	factura_total = factura_total + sub_total;
-			// }
-			// // factura_total = parseInt(factura_sub_total.reduce((a, b) => a + b, 0));
-			// console.log("cantidad en carro " + cantidad_en_carro);
-			// console.log("nombre de artículo: " + nombres);
 
 
